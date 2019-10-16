@@ -20,8 +20,6 @@ class WeatherService {
     const today = new Date().toISOString().substring(0, 10).replace(/-/g, "/");
     return this.getResource(`${this._woeid}/${today}`);
   }
-
-  getImgUrl = (type: string): string => `https://www.metaweather.com/static/img/weather/png/64/${type}.png`
 }
 
 export default new WeatherService();

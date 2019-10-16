@@ -1,5 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './routes'
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './redux/combineReducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
+import Routes from './routes';
+
+const composeEnhancers = composeWithDevTools({})
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
+
+ReactDOM.render(
+    <Provider store={store}>
+        <Routes />
+    </Provider>
+    , document.getElementById('root'));

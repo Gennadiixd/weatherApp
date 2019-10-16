@@ -1,23 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import Week from './components/week-block'
-import Day from './components/day-block'
+import Week from './pages/week';
+import Day from './pages/day';
 
 export default function Routes() {
   return (
     <AppWrapper>
       <BrowserRouter>
         <div>
-          <Link
-            to="/today"
-          >
+          <Link to="/today">
             Today
           </Link>
-          <Link
-            to="/"
-          >
+          <Link to="/">
             Week
           </Link>
         </div>
@@ -27,18 +23,7 @@ export default function Routes() {
         </Switch>
       </BrowserRouter>
     </AppWrapper>
-
   )
-}
-
-const getBackground = (stateOfWeather: string): string => {
-  if ((/Cloud/).test(stateOfWeather) || (/Rain/).test(stateOfWeather)) {
-    return `#EAEAEA`;
-  } else if ((/Clear/).test(stateOfWeather) || (/Light/).test(stateOfWeather)) {
-    return `#FFF7E0`;
-  } else {
-    return ``;
-  }
 }
 
 export const AppWrapper = styled.div`

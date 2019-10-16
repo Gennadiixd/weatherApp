@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { StyledFlex } from '../../styles/styled-flex';
-import weatherService from '../../api/weather-service';
-import { getBackground } from '../../styles/background';
+import { getWeatherForDayThunk } from '../../redux/modules/weather/actions';
+import * as I from '../../interfaces';
+import * as S from '../../styles/componentsStyles';
 
-const Day: React.FC = () => {
-    const [weatherForToday, setWeatherForToday] = useState<any>([])
-    const [loading, setLoading] = useState<boolean>(false)
+
+interface IDayProps extends I.IWeatherStore {
+    getWeatherForDay: () => void;
+}
+
+const Day: React.FC<IDayProps> = ({ data, loading, requestTime, getWeatherForDay }) => {
 
     useEffect(() => {
-        setLoading(true);
-        weatherService.getWeatherForToday()
-            .then((data: any) => {
-                console.log(data)
-                setWeatherForToday(data);
-                setLoading(false);
-            });
+        if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
+            return;
+        } else {
+            getWeatherForDay();
+        }
     }, []);
 
     return (
@@ -26,22 +28,18 @@ const Day: React.FC = () => {
     );
 }
 
-export default Day;
-
-
-interface DayWrapperProps {
-    weatherState: string;
+const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
+    return {
+        requestTime: state.weather.day.requestTime,
+        data: state.weather.day.data,
+        loading: state.weather.day.loading
+    }
 }
 
-const DayWrapper = styled(StyledFlex) <DayWrapperProps>`
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
-    background: ${props => getBackground(props.weatherState)};
-`;
+const mapDispathcToProps = (dispatch: Dispatch) => {
+    return {
+        getWeatherForDay: bindActionCreators(getWeatherForDayThunk, dispatch)
+    }
+}
 
-const Image = styled.img`
-`;
+export default connect(mapStateToProps, mapDispathcToProps)(Day)

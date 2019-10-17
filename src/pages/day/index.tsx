@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getWeatherForDayThunk } from '../../redux/modules/weather/actions';
 import * as I from '../../interfaces';
-import * as S from '../../styles/componentsStyles';
+import Day from './view'
 
-
-interface IDayProps extends I.IWeatherStore {
-    getWeatherForDay: (requestTime: Date | undefined) => void;
-}
-
-const Day: React.FC<IDayProps> = ({ data, loading, requestTime, getWeatherForDay }) => {
-
-    useEffect(() => {
-        getWeatherForDay(requestTime);
-    }, []);
-
-    return (
-        <div>
-
-        </div>
-    );
-}
-
+import { getWeatherForDayThunk } from '../../redux/modules/weather/actions';
 const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
     return {
         requestTime: state.weather.day.requestTime,
@@ -34,7 +15,7 @@ const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
 
 const mapDispathcToProps = (dispatch: Dispatch) => {
     return {
-        getWeatherForDay: bindActionCreators((requestTime: Date | undefined) => getWeatherForDayThunk(requestTime), dispatch)
+        getWeatherForDay: bindActionCreators(getWeatherForDayThunk, dispatch)
     }
 }
 

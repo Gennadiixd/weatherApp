@@ -30,7 +30,7 @@ export const receiveWeatherDay = (data: I.IWeatherResponse): I.IAction => {
 }
 
 export const getWeatherForWeekThunk = (requestTime: Date | undefined) => {
-    if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
+    if (requestTime && ((new Date()).toLocaleDateString() !== (new Date()).toLocaleDateString())) {
         return {
             type: "DUMMY"
         }

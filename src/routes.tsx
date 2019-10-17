@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import * as S from './styles/componentsStyles'
+import * as S from './components/componentsStyles'
 import Week from './pages/week';
 import Day from './pages/day';
 

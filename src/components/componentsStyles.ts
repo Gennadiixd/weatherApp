@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getBackground } from './background';
+import { getBackground } from '../styles/background';
 
 export const AppWrapper = styled.div`
     display: flex;
@@ -15,25 +15,25 @@ export const AppWrapper = styled.div`
 export const StyledFlex = styled.div`
     display: flex;
 `
-interface DayCardProps {
-    weatherState: string;
-}
+// interface DayCardProps {
+//     weatherState: string;
+// }
 
-export const WeekWrapper = styled(StyledFlex)`
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
-`;
+// export const WeekWrapper = styled(StyledFlex)`
+//     height: 100%;
+//     width: 100%;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     padding-top: 30px;
+// `;
 
-export const DayBand = styled(StyledFlex) <DayCardProps>`
-    background: ${props => getBackground(props.weatherState)};
-    width: 100%;
-    justify-content: center;
-    padding: 0.5em 0em;
-`;
+// export const DayBand = styled(StyledFlex) <DayCardProps>`
+//     background: ${props => getBackground(props.weatherState)};
+//     width: 100%;
+//     justify-content: center;
+//     padding: 0.5em 0em;
+// `;
 
 export const DayCard = styled(StyledFlex)`
     width: 100%;

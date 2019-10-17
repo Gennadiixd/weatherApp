@@ -12,6 +12,8 @@ const initState = {
             max_temp: undefined,
             min_temp: undefined,
             id: undefined,
+            the_temp: undefined,
+            created: '',
         }]
     },
     day: {
@@ -24,6 +26,8 @@ const initState = {
             max_temp: undefined,
             min_temp: undefined,
             id: undefined,
+            the_temp: undefined,
+            created: '',
         }]
     }
 }
@@ -43,6 +47,8 @@ const weather = (state: I.IPeriod = initState, action: I.IAction): I.IPeriod => 
                         max_temp: undefined,
                         min_temp: undefined,
                         id: undefined,
+                        the_temp: undefined,
+                        created: '',
                     }]
                 }
             };
@@ -70,6 +76,8 @@ const weather = (state: I.IPeriod = initState, action: I.IAction): I.IPeriod => 
                         max_temp: undefined,
                         min_temp: undefined,
                         id: undefined,
+                        the_temp: undefined,
+                        created: '',
                     }]
                 }
             };

@@ -16,7 +16,7 @@ export const receiveWeatherWeek = (data: I.IWeatherResponse): I.IAction => {
     }
 }
 
-export const fetchWeatherDay = (...args: any): I.IAction => {
+export const fetchWeatherDay = (): I.IAction => {
     return {
         type: C.FETCH_DAY_SENDED
     }
@@ -30,7 +30,7 @@ export const receiveWeatherDay = (data: I.IWeatherResponse): I.IAction => {
 }
 
 export const getWeatherForWeekThunk = (requestTime: Date | undefined) => {
-    if (requestTime && ((new Date()).toLocaleDateString() !== (new Date()).toLocaleDateString())) {
+    if (requestTime && ((new Date()).toLocaleDateString() === (new Date()).toLocaleDateString())) {
         return {
             type: "DUMMY"
         }
@@ -43,8 +43,9 @@ export const getWeatherForWeekThunk = (requestTime: Date | undefined) => {
 }
 
 export const getWeatherForDayThunk = (requestTime: Date | undefined) => {
-    if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
+    if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 1000)) {
         return {
+            // TODO: rob of "DUMMY" actions
             type: "DUMMY"
         }
     }

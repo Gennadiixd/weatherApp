@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { getImgUrl } from '../../utils/imgService';
+import Spinner from '../../components/spinner'
 import * as I from '../../interfaces';
 import * as CS from '../../components/componentsStyles';
 import * as PS from './components/styled';
@@ -11,13 +12,13 @@ interface IWeekProps extends I.IWeatherStore {
 }
 
 const Week: React.FC<IWeekProps> = ({ data, loading, requestTime, getWeatherForWeek }) => {
+    if (data instanceof Error) throw data
+
     useEffect(() => {
         getWeatherForWeek(requestTime)
     }, []);
 
     const renderDays = () => {
-        if (data instanceof Error) throw data
-
         return data.map(day => {
             const {
                 applicable_date,
@@ -64,7 +65,7 @@ const Week: React.FC<IWeekProps> = ({ data, loading, requestTime, getWeatherForW
 
     if (loading) {
         return (
-            <h1>Loading...</h1>
+            <Spinner />
         )
     }
 

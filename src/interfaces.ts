@@ -23,6 +23,8 @@ export interface IDay {
     max_temp: number | undefined;
     min_temp: number | undefined;
     id: number | undefined;
+    the_temp: number | undefined;
+    created: string | undefined;
 }
 
 export interface IAction {

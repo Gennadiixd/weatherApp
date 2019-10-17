@@ -8,17 +8,13 @@ import * as S from '../../styles/componentsStyles';
 
 
 interface IDayProps extends I.IWeatherStore {
-    getWeatherForDay: () => void;
+    getWeatherForDay: (requestTime: Date | undefined) => void;
 }
 
 const Day: React.FC<IDayProps> = ({ data, loading, requestTime, getWeatherForDay }) => {
 
     useEffect(() => {
-        if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
-            return;
-        } else {
-            getWeatherForDay();
-        }
+        getWeatherForDay(requestTime);
     }, []);
 
     return (
@@ -38,7 +34,7 @@ const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
 
 const mapDispathcToProps = (dispatch: Dispatch) => {
     return {
-        getWeatherForDay: bindActionCreators(getWeatherForDayThunk, dispatch)
+        getWeatherForDay: bindActionCreators((requestTime: Date | undefined) => getWeatherForDayThunk(requestTime), dispatch)
     }
 }
 

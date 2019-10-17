@@ -9,17 +9,12 @@ import * as S from '../../styles/componentsStyles';
 
 //TODO: gather all interfaces in one place
 interface IWeekProps extends I.IWeatherStore {
-    getWeatherForWeek: () => void;
+    getWeatherForWeek: (requestTime: Date | undefined) => void;
 }
 
 const Week: React.FC<IWeekProps> = ({ data, loading, requestTime, getWeatherForWeek }) => {
     useEffect(() => {
-        //TODO: remove condition with date to middleware
-        if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
-            return;
-        } else {
-            getWeatherForWeek()
-        }
+        getWeatherForWeek(requestTime)
     }, []);
 
     const renderDays = () => {
@@ -92,7 +87,7 @@ const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
 
 const mapDispathcToProps = (dispatch: Dispatch) => {
     return {
-        getWeatherForWeek: bindActionCreators(getWeatherForWeekThunk, dispatch)
+        getWeatherForWeek: bindActionCreators((requestTime: Date | undefined) => getWeatherForWeekThunk(requestTime), dispatch)
     }
 }
 

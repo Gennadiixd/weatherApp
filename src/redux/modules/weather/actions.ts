@@ -16,7 +16,7 @@ export const receiveWeatherWeek = (data: I.IWeatherResponse): I.IAction => {
     }
 }
 
-export const fetchWeatherDay = (): I.IAction => {
+export const fetchWeatherDay = (...args: any): I.IAction => {
     return {
         type: C.FETCH_DAY_SENDED
     }
@@ -29,7 +29,12 @@ export const receiveWeatherDay = (data: I.IWeatherResponse): I.IAction => {
     }
 }
 
-export const getWeatherForWeekThunk = () => {
+export const getWeatherForWeekThunk = (requestTime: Date | undefined) => {
+    if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
+        return {
+            type: "DUMMY"
+        }
+    }
     return async (dispatch: Dispatch) => {
         dispatch(fetchWeatherWeek());
         const data = await weatherService.getWeatherForWeek();
@@ -37,7 +42,12 @@ export const getWeatherForWeekThunk = () => {
     }
 }
 
-export const getWeatherForDayThunk = () => {
+export const getWeatherForDayThunk = (requestTime: Date | undefined) => {
+    if (requestTime && (new Date().getSeconds() - requestTime.getSeconds() < 10)) {
+        return {
+            type: "DUMMY"
+        }
+    }
     return async (dispatch: Dispatch) => {
         dispatch(fetchWeatherDay());
         // TODO: fix this temporary hack, low priority

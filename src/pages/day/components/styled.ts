@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getBackground } from '../../../styles/background';
+import { getBackgroundCard } from '../../../styles/background';
 
 interface WrapperProps {
     weatherState: string;

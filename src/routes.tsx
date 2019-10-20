@@ -10,9 +10,7 @@ export default function Routes() {
   return (
     <BrowserRouter>
       
-      <AppWrapper
-        weatherState={"default"}
-      >
+      <AppWrapper>
         <NavButtons />
         <Switch>
           <Route path="/week" exact component={Week} />

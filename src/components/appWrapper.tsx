@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router'
 
 import * as I from '../interfaces';
-import { getBackground } from '../styles/background'
+import { getBackgroundApp } from '../styles/background'
 
 const mapStateToProps = (state: I.IStore): WrapperProps | Error => {
     if (state.weather.day.data instanceof Error) throw state.weather.day.data
@@ -15,8 +16,8 @@ interface WrapperProps {
     weatherState: any,
 }
 
-const AppWrapper = styled.div <WrapperProps>`
-    background: ${props => getBackground(props.weatherState)};
+const AppWrapper = styled.div <WrapperProps | any>`
+    background: ${props => getBackgroundApp(props.weatherState, props.location.pathname)};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,4 +25,4 @@ const AppWrapper = styled.div <WrapperProps>`
     padding: 30px 0px;
 `;
 
-export default connect(mapStateToProps, null)(AppWrapper)
+export default withRouter(connect(mapStateToProps, null)(AppWrapper))

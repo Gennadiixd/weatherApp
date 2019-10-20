@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getBackground } from '../../../styles/background';
+import { getBackgroundCard } from '../../../styles/background';
 
 export const StyledFlex = styled.div`
     display: flex;
@@ -10,7 +10,7 @@ interface DayCardProps {
 }
 
 export const DayBand = styled(StyledFlex) <DayCardProps>`
-    background: ${props => getBackground(props.weatherState)};
+    background: ${props => getBackgroundCard(props.weatherState)};
     width: 100%;
     justify-content: center;
     padding: 0.5em 0em;

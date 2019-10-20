@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import { getBackground } from '../../../styles/background';
 
-interface DayWrapperProps {
+interface WrapperProps {
     weatherState: string;
 }
 
-export const DayWrapper = styled.div <DayWrapperProps>`
-    background: ${props => getBackground(props.weatherState)};
+export const DayWrapper = styled.div <WrapperProps>`
     display: flex;
     height: 100%;
     width: 100%;

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import * as I from '../../interfaces';
 import Day from './view'
-
 import { getWeatherForDayThunk } from '../../redux/modules/weather/actions';
+
 const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
     return {
         requestTime: state.weather.day.requestTime,

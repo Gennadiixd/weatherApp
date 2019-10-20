@@ -1,4 +1,19 @@
 import styled from 'styled-components';
+import {NavLink} from 'react-router-dom';
+
+export const StyledLink = styled(NavLink)`
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  background: #3498db;
+  &.active {
+    background: transparent;
+    color: black;
+  }
+`;
 
 export const AppWrapper = styled.div`
     display: flex;
@@ -8,7 +23,6 @@ export const AppWrapper = styled.div`
     background-color: #F9F9F9;
     padding: 30px 0px;
 `;
-
 
 export const StyledFlex = styled.div`
     display: flex;
@@ -39,20 +53,8 @@ export const WeatherBlock = styled(StyledFlex)`
 `;
 
 export const TemperatureBlock = styled(StyledFlex)`
-    justify-content: center;
     align-items: center;
     padding-right: 20px;
-`;
-
-export const Button = styled.button`
-  background: #3498db;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  border: black;
 `;
 
 export const ButtonBlock = styled.div`

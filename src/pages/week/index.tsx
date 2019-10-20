@@ -1,9 +1,9 @@
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getWeatherForWeekThunk } from '../../redux/modules/weather/actions';
 
 import * as I from '../../interfaces';
 import Week from './view'
+import { getWeatherForWeekThunk } from '../../redux/modules/weather/actions';
 
 const mapStateToProps = (state: I.IStore): I.IWeatherStore => {
     return {

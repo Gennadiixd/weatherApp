@@ -15,28 +15,18 @@ export const StyledLink = styled(NavLink)`
   }
 `;
 
-export const AppWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #F9F9F9;
-    padding: 30px 0px;
-`;
-
 export const StyledFlex = styled.div`
     display: flex;
 `
 
 export const DayCard = styled(StyledFlex)`
-    width: 100%;
-    height: 100%;
     position: relative;
     width: 25em;
     justify-content: space-between;
 `;
 
 export const Image = styled.img`
+    max-width: 5em;
 `;
 
 export const DateBlock = styled(StyledFlex)`

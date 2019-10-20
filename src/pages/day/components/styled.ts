@@ -17,8 +17,8 @@ export const DayWrapper = styled.div <WrapperProps>`
 
 export const Image = styled.img`
     display: flex;
-    max-width: 15em;
-    maw-height: 15em;
+    max-width: 10em;
+    maw-height: 19em;
     padding: 3em;
 `;
 
@@ -26,7 +26,7 @@ export const TemperatureBlock = styled.div`
     display: flex;
     max-width: 15em;
     maw-height: 15em;
-    padding: 2em;
+    padding: 1em;
     font-size: 2em;
 `;
 
@@ -36,5 +36,5 @@ export const PlaceAndTimeBlock = styled.div`
     flex-direction: column;
     align-items: center;
     maw-height: 15em;
-    padding: 2em;
+    padding: 1em;
 `;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
 
 import * as I from '../interfaces';
-import { getBackgroundApp } from '../styles/background'
+import { getBackgroundApp } from '../styles/background';
 
 const mapStateToProps = (state: I.IStore): WrapperProps | Error => {
     if (state.weather.day.data instanceof Error) throw state.weather.day.data

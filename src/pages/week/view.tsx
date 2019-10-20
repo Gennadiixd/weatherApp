@@ -51,7 +51,7 @@ const Week: React.FC<IWeekProps> = ({ data, loading, requestTime, getWeatherForW
 
                         <CS.WeatherBlock>
                             <CS.TemperatureBlock>
-                                {Math.round(max_temp)} / {Math.round(min_temp)}
+                                {Math.round(max_temp)}°/{Math.round(min_temp)}
                             </CS.TemperatureBlock>
                             <CS.Image
                                 src={getImgUrl(weather_state_abbr)}

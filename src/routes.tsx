@@ -5,6 +5,7 @@ import NavButtons from './components/navButtons';
 import AppWrapper from './components/appWrapper';
 import Week from './pages/week';
 import Day from './pages/day';
+import WithDropdown from './pages/withDropDown';
 
 export default function Routes() {
   return (
@@ -12,6 +13,7 @@ export default function Routes() {
       <AppWrapper>
         <NavButtons/>
         <Switch>
+          <Route path="/dropdown" exact component={WithDropdown} />
           <Route path="/week" exact component={Week} />
           <Route path="/today" exact component={Day} />
         </Switch>

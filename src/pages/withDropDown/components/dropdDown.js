@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
+//TODO: CDM suggests document.addEventListener('click', closeDropdown)
+//TODO: CWU document.removeEventListener('click', closeDropdown)
+
 const debounce = (cbf, delay) => {
     let timer;
     let controller;
@@ -26,7 +29,7 @@ export default function DropdDown() {
 
     useEffect(() => {
         setDebouncedQueryFunction(() => debounce(queryCities, 200));
-        document.addEventListener('click', console.log)
+        document.addEventListener('click', closeDropdown)
     }, [])
 
     const queryCities = (query = '', signal) => {
@@ -34,23 +37,37 @@ export default function DropdDown() {
         fetch(api, {signal})
             .then(data => data.json())
             .then(cities => setSuggests(cities.results))
+            .catch(console.log)
     }
 
     const openDropdown = (e) => {
-        e.stopPropagation();
-        if (e.target.value) {
+        console.log(e.target.name);
+
+        e.nativeEvent.stopImmediatePropagation()
+        // e.stopPropagation();
+        if (e.target.value || e.target.name === 'dropDownTrigger') {
+            console.log(`$open <==================`);
             setIsOpen(true)
         }
     }
 
     const closeDropdown = (e) => {
-        e.stopPropagation();
+        console.log(`$close <==================`);
+        if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation()
         setIsOpen(false)
+    }
+
+    const toggleDropdown = (e) => {
+        if (isOpen) {
+            closeDropdown(e);
+        } else {
+            openDropdown(e);
+        }
     }
 
     const onChooseElement = (e) => {
         e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation()
+        if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation()
         console.log(e.target)
     }
 
@@ -88,6 +105,9 @@ export default function DropdDown() {
                 onChange={inputHandler}
                 value={input}
             />
+            <span
+                onClick={toggleDropdown}
+            >v</span>
             {isOpen && (
                 renderSuggests()
             )}

@@ -6,17 +6,15 @@ const debounce = (cbf, delay) => {
     let controller;
     let signal;
     return (query) => {
-        if (signal) {
-            controller.abort();
-        }
+        if (signal) controller.abort();
 
-        controller = new AbortController();
-        signal = controller.signal;
+        if (timer) clearTimeout(timer);
 
-        if (timer) {
-            clearTimeout(timer);
-        }
-        timer = setTimeout(() => cbf(query, signal), delay);
+        timer = setTimeout(() => {
+            controller = new AbortController();
+            signal = controller.signal;
+            cbf(query, signal);
+        }, delay);
     }
 }
 

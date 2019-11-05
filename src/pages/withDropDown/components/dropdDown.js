@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
 import SuggestionsField from './suggestionsField';
-import SuggestsIterator from './suggestsIterator';
+import SuggestsIterator from '../../../utils/suggestsIterator';
 import * as S from './styles';
 
 export default function DropdDown({
+    renderSuggests,
     getSuggests,
-    structure,
-    suggests,
+    suggests, 
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState('');
@@ -17,25 +17,25 @@ export default function DropdDown({
 
     const setRefsFunction = (refs) => {
         if (refs.current && refs.current.length) {
-            setCurrent(-1)
-            setSuggestsIterator(new SuggestsIterator(refs, current, setCurrent, isOpen))
+            setCurrent(-1);
+            setSuggestsIterator(new SuggestsIterator(refs, current, setCurrent, isOpen));
         }
-        setRefs(refs)
+        setRefs(refs);
     }
 
     const openDropdown = (e) => {
         e.nativeEvent.stopPropagation()
         if (e.target.value) {
-            setIsOpen(true)
+            setIsOpen(true);
         }
     }
 
     const closeDropdown = (e) => {
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
-    const onChooseElement = (e) => {
-        setInput(e.target.innerText)
+    const onSelect = (e) => {
+        setInput(e.text);
     }
 
     const inputHandler = (e) => {
@@ -51,12 +51,12 @@ export default function DropdDown({
     const keyHandler = async (e) => {
         if (refs.current && refs.current.length) {
             if (e.key === 'ArrowDown') {
-                suggestsIterator.next()
+                suggestsIterator.next();
             } else if (e.key === 'ArrowUp') {
-                suggestsIterator.prev()
+                suggestsIterator.prev();
             } else if (e.key === 'Enter') {
-                setInput(e.target.innerText)
-                closeDropdown(e)
+                setInput(e.target.innerText);
+                closeDropdown(e);
             }
         }
     }
@@ -67,16 +67,16 @@ export default function DropdDown({
         >
             <input
                 placeholder='введите ваш город'
-                onClick={openDropdown}
                 onChange={inputHandler}
+                onClick={openDropdown}
                 value={input}
             />
             {isOpen && (
                 <SuggestionsField
+                    renderSuggests={renderSuggests}
                     suggests={suggests}
-                    onChooseElement={onChooseElement}
+                    onSelect={onSelect}
                     onClose={closeDropdown}
-                    structure={structure}
                     setRefs={setRefsFunction}
                 />
             )}

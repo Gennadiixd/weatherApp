@@ -1,33 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import DropDown from './components/dropdDown';
-
-const debounce = (cbf, delay) => {
-    let timer;
-    let controller;
-    let signal;
-    return (query) => {
-        if (signal) {
-            controller.abort();
-            signal = null;
-        }
-
-        if (timer) clearTimeout(timer);
-
-        timer = setTimeout(() => {
-            controller = new AbortController();
-            signal = controller.signal;
-            cbf(query, signal);
-        }, delay);
-    }
-}
+import debounce from '../../utils/debounce';
 
 export default function WithDropDown() {
-    const [debouncedQueryFunction, setDebouncedQueryFunction] = useState(null)
-    const [suggests, setSuggests] = useState([])
-    const [structure, setStructure] = useState({
-        fieldValue: 'text',
-        fieldKey: 'id'
-    })
+    const [debouncedQueryFunction, setDebouncedQueryFunction] = useState(null);
+    const [suggests, setSuggests] = useState([]);
 
     useEffect(() => {
         setDebouncedQueryFunction(() => debounce(queryCities, 200));
@@ -41,23 +18,40 @@ export default function WithDropDown() {
             .catch(console.log)
     }
 
+    const renderSuggests = ({suggestsRef, suggests, onSelectSuggest}) => {
+        return (
+            <ul>
+                {suggests.map((suggest, index) => (
+                    <li
+                        onClick={onSelectSuggest(index)}
+                        key={suggest.id}
+                        ref={el => suggestsRef.current[index] = el}
+                        tabIndex="0"
+                    >
+                        {suggest.text}
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+
     return (
         <div style={{marginTop: '3em'}}>
             <form>
                 <DropDown
+                    renderSuggests={renderSuggests}
                     getSuggests={debouncedQueryFunction}
                     suggests={suggests}
-                    structure={structure}
                 />
                 <DropDown
+                    renderSuggests={renderSuggests}
                     getSuggests={debouncedQueryFunction}
                     suggests={suggests}
-                    structure={structure}
                 />
                 <DropDown
+                    renderSuggests={renderSuggests}
                     getSuggests={debouncedQueryFunction}
                     suggests={suggests}
-                    structure={structure}
                 />
             </form>
         </div>

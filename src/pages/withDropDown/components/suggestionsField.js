@@ -1,40 +1,32 @@
 import React, {useEffect, useRef} from 'react';
 
 export default function SuggestsField({
-    onChooseElement,
-    structure,
+    renderSuggests,
+    onSelect,
     suggests,
     onClose,
-    setRefs
+    setRefs,
 }) {
     const suggestsRef = useRef([]);
 
     useEffect(() => {
-        document.addEventListener('click', onClose)
+        document.addEventListener('click', onClose);
         return () => {
-            document.removeEventListener('click', onClose)
+            document.removeEventListener('click', onClose);
         }
     })
 
     useEffect(() => {
         suggestsRef.current = suggestsRef.current.slice(0, suggests.length);
-        setRefs(suggestsRef)
+        setRefs(suggestsRef);
     }, [suggests]);
 
+    const onSelectSuggest = (index) => () => {
+        onSelect(suggests[index]);
+    }
+
     return (
-        <ul
-            onClick={onChooseElement}
-        >
-            {suggests.map((suggest, index) => (
-                <li
-                    key={suggest[structure.fieldKey]}
-                    ref={el => suggestsRef.current[index] = el}
-                    tabIndex="0"
-                >
-                    {suggest[structure.fieldValue]}
-                </li>
-            ))}
-        </ul>
+        renderSuggests({suggestsRef, suggests, onSelectSuggest})
     )
 }
 
